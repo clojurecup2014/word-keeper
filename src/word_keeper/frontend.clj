@@ -10,7 +10,7 @@
             {:twitter-auth-uri twitter-auth-uri})})
 
 (defn action-signin [req]
-  (let [user-data (authorize (-> req :params :verifier))]
+  (let [user-data (authorize (-> req :params :oauth_verifier))]
     {:status 200
      :headers {"Content-Type" "text/plain"}
      :body (str "Signed in as " (:screen_name user-data))}))
