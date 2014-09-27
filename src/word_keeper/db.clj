@@ -23,7 +23,7 @@
 (defquery select-twitter-user "sql/select-twitter-user.sql")
 (defn find-twitter-user [twitter-id] (first (select-twitter-user db-spec twitter-id)))
 
-(defquery insert-user "sql/insert-user.sql")
+(defquery insert-user<! "sql/insert-user.sql")
 (defn create-user! [] (insert-user<! db-spec))
 
 (defquery insert-twitter-user! "sql/insert-twitter-user.sql")
