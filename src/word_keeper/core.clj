@@ -2,14 +2,8 @@
   (:require [org.httpkit.server :refer [run-server]]
             [compojure.core :refer [defroutes GET]]
             [compojure.handler :refer [site]]
-            [clostache.parser :refer [render-resource]]))
-
-(defn action-index [req]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body (render-resource
-            "views/index.html.mustache"
-            nil)})
+            [word-keeper.backend  :refer :all]
+            [word-keeper.frontend :refer :all]))
 
 (defroutes routes
   (GET "/" [] action-index))
