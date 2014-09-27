@@ -20,14 +20,16 @@
 
 (defn action-signin [req]
   (let [user-data (authorize (-> req :session :request-token)
-                                                 (-> req :params :oauth_verifier))]
+                             (-> req :params :oauth_verifier))
+        user_id (:user_id user-data)
+        screen_name (:screen_name user-data)]
     (if (contains? user-data :user_id)
       (do
-        (if (nil? (find-twitter-user (:user_id user-data)))
-          (create-twitter-user! (:user_id user-data) (:screen_name user-data)))
+        (if (nil? (find-twitter-user (Integer/parseInt user_id)))
+          (create-twitter-user! (Integer/parseInt user_id)  screen_name))
         {:status 200
          :headers {"Content-Type" "text/plain"}
-         :body (str "Signed in as " (:screen_name user-data))})
+         :body (str "Signed in as " screen_name)})
       {:status 200
        :headers {"Content-Type" "text/plain"}
        :body ("Something went wrong")})))
