@@ -4,7 +4,8 @@
 (def db-spec {:classname "org.postgresql.Driver"
               :subprotocol "postgresql"
               :subname "//localhost:5432/wordkeeper"
-              :user "cloudsigma"})
+              :user "cloudsigma"
+              :password "wordkeeper"})
 
 (defquery select-english-russian "sql/select-english-russian.sql")
 (defquery select-russian-english "sql/select-russian-english.sql")
