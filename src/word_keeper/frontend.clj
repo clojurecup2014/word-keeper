@@ -24,7 +24,7 @@
     (if (contains? user-data :user_id)
       (do
         (if (nil? (find-twitter-user (:user_id user-data)))
-          (create-twitter-user (:user_id user-data) (:screen_name user-data)))
+          (create-twitter-user! (:user_id user-data) (:screen_name user-data)))
         {:status 200
          :headers {"Content-Type" "text/plain"}
          :body (str "Signed in as " (:screen_name user-data))})
