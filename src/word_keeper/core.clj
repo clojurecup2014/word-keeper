@@ -13,6 +13,7 @@
 (defroutes routes
   (GET "/" [] action-index)
   (GET "/signin" [] action-signin)
+  (GET "/twitter-auth" [] action-twitter-auth)
   (files "/public/")
   (not-found "<h1>404. Not found</h1>"))
 

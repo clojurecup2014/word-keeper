@@ -14,9 +14,5 @@
 
 (defn request-token [] (oauth/request-token consumer "http://word-keeper.clojurecup.com/signin"))
 
-(defn twitter-auth-uri []
-  (let [tok (request-token)]
-    (oauth/user-approval-uri consumer (:oauth_token tok))))
-
-(defn authorize [verifier]
-  (oauth/access-token consumer request-token verifier))
+(defn authorize [token verifier]
+  (oauth/access-token consumer token verifier))
