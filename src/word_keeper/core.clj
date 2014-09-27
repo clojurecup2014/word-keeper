@@ -7,7 +7,8 @@
             [word-keeper.frontend :refer :all]))
 
 (defroutes routes
-  (GET "/" [] action-index))
+  (GET "/" [] action-index)
+  (GET "/signin" []))
 
 (defn -main [& args]
   (run-server (site #'routes) {:port 8080}))
