@@ -16,5 +16,5 @@
 
 (def twitter-auth-uri (oauth/user-approval-uri consumer (:oauth_token request-token)))
 
-(def authorize [verifier]
+(defn authorize [verifier]
   (oauth/access-token consumer request-token verifier))
