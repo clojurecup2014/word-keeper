@@ -7,7 +7,7 @@
    :headers {"Content-Type" "text/html"}
    :body (render-resource
             "views/index.html.mustache"
-            {:twitter-auth-uri twitter-auth-uri})})
+            {:twitter-auth-uri (twitter-auth-uri)})})
 
 (defn action-signin [req]
   (let [user-data (authorize (-> req :params :oauth_verifier))]
