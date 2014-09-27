@@ -13,6 +13,7 @@
                  [ring "1.2.0"]
                  [cheshire "5.3.1"]
                  [de.ubercode.clostache/clostache "1.4.0"]]
+  :plugins [[lein-cljsbuild "1.0.3"]]
   :cljsbuild {:builds [{:source-paths ["src-cljs"]
                         :compiler {:output-to "public/js/frontend.js"
                                    :output-dir "public/js/"
