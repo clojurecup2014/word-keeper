@@ -1,4 +1,4 @@
-WITH v AS (SELECT :word::text AS word)
+WITH v AS (SELECT :russian_word :: text AS word)
     ,s AS (SELECT id FROM Russian JOIN v USING (word))
     ,i AS (
        INSERT INTO Russian (word)

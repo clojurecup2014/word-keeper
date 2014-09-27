@@ -33,3 +33,10 @@
        (create-twitter-user! twitter-id twitter-name uid)))
   ([twitter-id twitter-name uid]
      (insert-twitter-user! db-spec twitter-id twitter-name uid)))
+
+(defquery insert-russian "sql/insert-russian.sql")
+(defn create-russian! [word] (insert-russian db-spec word))
+
+(defquery insert-english "sql/insert-english.sql")
+(defn create-english! [word] (insert-english db-spec word))
+
