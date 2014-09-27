@@ -1,6 +1,6 @@
 (ns word-keeper.frontend
   (:require [clostache.parser :refer [render-resource]]
-            [word-keeper.auth :refer [authorize request-token]]))
+            [word-keeper.auth :refer :all]))
 
 (defn action-index [req]
   {:status 200
@@ -18,8 +18,15 @@
      :headers {"location" dest-uri}}))
 
 (defn action-signin [req]
-  (let [user-data (authorize (-> req :session :request-token)
-                             (-> req :params :oauth_verifier))]
-    {:status 200
-     :headers {"Content-Type" "text/plain"}
-     :body (str "Signed in as " (:screen_name user-data))}))
+  (let [{:keys [user_id screen_name]} (authorize (-> req :session :request-token)
+                                                 (-> req :params :oauth_verifier))]
+    (if (contains? user-data :user_id)
+      (do
+        (if (nil? (find-twitter-user user_id))
+          (create-twitter-user user_id screen_name))
+        {:status 200
+         :headers {"Content-Type" "text/plain"}
+         :body (str "Signed in as " screen_name)})
+      {:status 200
+       :headers {"Content-Type" "text/plain"}
+       :body ("Something went wrong")})))

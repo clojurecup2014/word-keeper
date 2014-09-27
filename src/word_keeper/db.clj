@@ -18,3 +18,17 @@
   (if (= from :en)
     (select-english-russian db-spec uid)
     (select-russian-english db-spec uid)))
+
+(defquery select-twitter-user "sql/select-twitter-user.sql")
+(defn find-twitter-user [twitter-id] (first (select-twitter-user db-spec twitter-id)))
+
+(defquery insert-user "sql/insert-user.sql")
+(defn create-user [] (insert-user db-spec))
+
+(defquery insert-twitter-user "sql/insert-twitter-user.sql")
+(defn create-twitter-user
+  ([twitter-id twitter-name]
+     (let [uid (-> (create-user) first :id)]
+       (create-twitter-user twitter-id twitter-name uid)))
+  ([twitter-id twitter-name uid]
+     (insert-twitter-user db-spec twitter-id twitter-name uid)))
