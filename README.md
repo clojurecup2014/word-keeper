@@ -1,6 +1,6 @@
 # word-keeper
 
-A Clojure library designed to ... well, that part is up to you.
+A web application for efficient vocabulary training.
 
 ## Usage
 
