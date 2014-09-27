@@ -18,4 +18,5 @@
                         :compiler {:output-to "public/js/frontend.js"
                                    :output-dir "public/js/"
                                    :optimizations :none
-                                   :pretty-print true}}]})
+                                   :pretty-print true}}]}
+  :main word-keeper.core)
