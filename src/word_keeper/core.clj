@@ -9,13 +9,14 @@
 
 (def consumer-key "5KvZggyamEy8yHD0oACgAkLxH")
 (def consumer-secret "3DeEHXQ6LVh7LxSdApivzAOiwBAcGdvRorheKzheCchbPPQF6h")
+(def consumer (oauth/make-consumer consumer-key
+                                   consumer-secret
+                                   "https://api.twitter.com/oauth/request_token"
+                                   "https://api.twitter.com/oauth/access_token"
+                                   "https://api.twitter.com/oauth/authorize"
+                                   :hmac-sha1))
 
-(defn action-index [req]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body (render-resource
-            "views/index.html.mustache"
-            nil)})
+(def request-token (oauth/request-token consumer "http://word-keeper.clojurecup.com/signin"))
 
 (defroutes routes
   (GET "/" [] action-index))
