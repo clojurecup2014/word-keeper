@@ -7,12 +7,9 @@
             [word-keeper.backend  :refer :all]
             [word-keeper.frontend :refer :all]))
 
-<<<<<<< HEAD
 (def consumer-key "5KvZggyamEy8yHD0oACgAkLxH")
 (def consumer-secret "3DeEHXQ6LVh7LxSdApivzAOiwBAcGdvRorheKzheCchbPPQF6h")
 
-=======
->>>>>>> FETCH_HEAD
 (defroutes routes
   (GET "/" [] action-index)
   (files "/public/")
