@@ -1,6 +1,7 @@
 (ns word-keeper.frontend
   (:require [clostache.parser :refer [render-resource]]
-            [word-keeper.auth :refer :all]))
+            [word-keeper.auth :refer :all]
+            [word-keeper.db :refer :all]))
 
 (defn action-index [req]
   {:status 200
