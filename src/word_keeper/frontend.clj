@@ -41,13 +41,14 @@
       (do
         (if (nil? (find-twitter-user (Integer/parseInt user_id)))
           (create-twitter-user! (Integer/parseInt user_id)  screen_name))
-        {:status 200
-         :headers {"Content-Type" "text/plain"}
-         :body (str "Signed in as " screen_name)
+        {:status 301
+         :headers {"location" "/vocabulary"}
          :session (assoc (:session req) :uid (:uid (find-twitter-user (Integer/parseInt user_id))))})
-      {:status 200
-       :headers {"Content-Type" "text/plain"}
-       :body ("Something went wrong")})))
+      {:status 301
+       :headers {"location" "/"}
+       :session (assoc (:session req)
+                  :notice "Something went wrong. Please try again."
+                  :show_notice true)})))
 
 (defn action-signout [req]
   (let [session (assoc (:session req)
