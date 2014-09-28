@@ -52,7 +52,7 @@
                   :show_notice true)})))
 
 (defn action-delete-user-translation [req uid word translation]
-  ; call yesql
+  (remove-english-russian! uid word translation)
   {:status 301
    :headers {"location" "/vocabulary"}})
 
