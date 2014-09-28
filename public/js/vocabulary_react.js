@@ -8,6 +8,7 @@ var Translation = React.createClass({
           {this.props.word}
         </h2>
         {this.props.children}
+        <hr />
       </div>
     );
   }
