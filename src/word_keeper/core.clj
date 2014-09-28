@@ -32,7 +32,7 @@
 
 (defroutes routes
   (GET "/" [] action-index)
-  (POST "/api/translations/:uid/create" [uid] #(post-translation % uid))
+  (POST "/api/translations/:uid/create" [uid] #(post-translation % (Integer/parseInt uid)))
   (GET "/api/translations/:uid" [uid] #(flat-user-translations % uid))
   (GET "/vocabulary" [] (-> action-vocabulary auth-middleware))
   (GET "/signin" [] action-signin)
