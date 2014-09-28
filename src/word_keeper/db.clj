@@ -48,3 +48,7 @@
 (defquery insert-english-russian<! "sql/insert-english-russian.sql")
 (defn create-english-russian! [uid wid translation]
   (insert-english-russian<! db-spec uid wid translation))
+
+(defquery delete-english-russian! "sql/delete-english-russian.sql")
+(defn remove-english-russian! [uid word translation]
+  (delete-english-russian! db-spec uid word translation))
