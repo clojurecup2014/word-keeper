@@ -12,7 +12,7 @@
 
 (defn action-vocabulary [req]
   (let [uid (:uid (:session req))
-        screen_name (:twitter_name (find-twitter-user-by-uid uid))]
+        screen_name (:screen_name req)]
     {:status 200
      :headers {"Content-Type" "text/html"}
      :body (render-resource
