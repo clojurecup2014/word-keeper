@@ -32,7 +32,7 @@
 
 (defroutes routes
   (GET "/" [] action-index)
-  (GET "/api/translations/:uid" [uid] #(user-translations % uid))
+  (GET "/api/translations/:uid" [uid] #(flat-user-translations % uid))
   (GET "/vocabulary" [] (-> action-vocabulary auth-middleware))
   (GET "/signin" [] action-signin)
   (GET "/signout" [] action-signout)
