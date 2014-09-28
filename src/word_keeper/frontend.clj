@@ -34,3 +34,12 @@
       {:status 200
        :headers {"Content-Type" "text/plain"}
        :body ("Something went wrong")})))
+
+(defn action-signout [req]
+  (let [session (assoc
+                  (:session req)
+                  :request-token nil
+                  :uid nil)]
+    {:status 301
+     :session session
+     :headers {"location" "/"}}))
