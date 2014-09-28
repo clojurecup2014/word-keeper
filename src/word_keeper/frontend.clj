@@ -4,11 +4,16 @@
             [word-keeper.db :refer :all]))
 
 (defn action-index [req]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body (render-resource
-            "views/index.html.mustache"
-            nil)})
+  (let [session (:session req)
+        notice (:notice session)
+        show_notice (:show_notice session)]
+    {:status 200
+     :headers {"Content-Type" "text/html"}
+     :session (assoc session :notice nil :show_notice nil)
+     :body (render-resource
+              "views/index.html.mustache"
+              {:notice notice
+               :show_notice show_notice})}))
 
 (defn action-vocabulary [req]
   (let [uid (:uid (:session req))
