@@ -1,8 +1,10 @@
+/** @jsx React.DOM */
+
 var Translation = React.createClass({
   render: function() {
     return (
       <div className="translation">
-        <h2 className="word">
+        <h2 className="translationAuthor">
           {this.props.word}
         </h2>
         {this.props.children}
@@ -10,13 +12,13 @@ var Translation = React.createClass({
     );
   }
 });
- 
+
 var TranslationList = React.createClass({
   render: function() {
     var translationNodes = this.props.data.map(function (translation) {
       return (
         <Translation word={translation.word}>
-          {translation.text}
+          {translation.translation}
         </Translation>
       );
     });
@@ -27,7 +29,7 @@ var TranslationList = React.createClass({
     );
   }
 });
- 
+
 var TranslationForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
@@ -45,13 +47,13 @@ var TranslationForm = React.createClass({
     return (
       <form className="translationForm" onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Your word" ref="word" />
-        <input type="text" placeholder="Your translation" ref="translation" />
-        <input type="submit" value="Save" />
+        <input type="text" placeholder="Translation..." ref="translation" />
+        <input type="submit" value="Post" />
       </form>
     );
   }
 });
- 
+
 var TranslationBox = React.createClass({
   loadTranslationsFromServer: function() {
     $.ajax({
@@ -99,8 +101,8 @@ var TranslationBox = React.createClass({
     );
   }
 });
- 
+
 React.renderComponent(
-  <TranslationBox url="/api/translations/1" pollInterval={2000} />,
-  document.getElementById("content")
+  <TranslationBox url="/api/translations/1" pollInterval={10000} />,
+  document.getElementById("reactable")
 );
