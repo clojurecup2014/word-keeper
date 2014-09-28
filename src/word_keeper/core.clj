@@ -21,20 +21,21 @@
 
 (defn auth-middleware [handler]
   (fn [req]
-    (if-let [screen_name (:screen_name req)]
-      (handler req)
-      {:status 301
-       :headers {"location" "/"}
-       :session (assoc (:session req)
-                  :notice "Please, sign is as twitter user"
-                  :show_notice true)})))
+    (if-let [uid (-> req :session :uid)]
+      (let [user (find-twitter-user-by-uid uid)]
+        (handler (assoc req :screen_name (:twitter_name user))))
+        {:status 301
+         :headers {"location" "/"}
+         :session (assoc (:session req)
+                    :notice "Please, sign in as twitter user"
+                    :show_notice true)})))
 
 (defroutes routes
   (GET "/" [] action-index)
   (GET "/api/translations/:uid" [uid] (-> user-translations
                                           user-middleware
                                           auth-middleware))
-  (GET "/vocabulary" [] (-> action-vocabulary user-middleware auth-middleware))
+  (GET "/vocabulary" [] (-> action-vocabulary auth-middleware))
   (GET "/signin" [] action-signin)
   (GET "/signout" [] action-signout)
   (GET "/twitter-auth" [] action-twitter-auth)
