@@ -18,9 +18,17 @@
         (handler (assoc req :screen_name (:twitter_name user))))
       (handler req))))
 
+(defn auth-middleware [handler]
+  (fn [req]
+    (if-let [screen_name (:screen_name req)]
+      (handler req)
+      {:status 301
+       :headers {"location" "/"}
+       :session (assoc (:session req) :notice "Please, sign is as twitter user")})))
+
 (defroutes routes
   (GET "/" [] action-index)
-  (GET "/vocabulary" [] (user-middleware action-vocabulary))
+  (GET "/vocabulary" [] (-> action-vocabulary user-middleware auth-middleware))
   (GET "/signin" [] action-signin)
   (GET "/signout" [] action-signout)
   (GET "/twitter-auth" [] action-twitter-auth)
