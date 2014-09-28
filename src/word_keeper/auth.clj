@@ -12,7 +12,7 @@
                                    "https://api.twitter.com/oauth/authorize"
                                    :hmac-sha1))
 
-(defn request-token [] (oauth/request-token consumer "http://127.0.0.1:8080/signin"))
+(defn request-token [] (oauth/request-token consumer "http://word-keeper.clojurecup.com/signin"))
 
 (defn authorize [token verifier]
   (oauth/access-token consumer token verifier))
