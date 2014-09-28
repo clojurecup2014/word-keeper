@@ -22,7 +22,8 @@
      :headers {"Content-Type" "text/html"}
      :body (render-resource
               "views/vocabulary.html.mustache"
-              {:screen_name screen_name})}))
+              {:screen_name screen_name
+               :uid uid})}))
 
 (defn action-twitter-auth [req]
   (let [tok (request-token)

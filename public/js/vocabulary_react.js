@@ -33,14 +33,14 @@ var TranslationList = React.createClass({
 var TranslationForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    var author = this.refs.author.getDOMNode().value.trim();
-    var text = this.refs.text.getDOMNode().value.trim();
-    if (!text || !author) {
+    var word = this.refs.word.getDOMNode().value.trim();
+    var translation = this.refs.translation.getDOMNode().value.trim();
+    if (!translation || !word) {
       return;
     }
-    this.props.onTranslationSubmit({author: author, text: text});
-    this.refs.author.getDOMNode().value = '';
-    this.refs.text.getDOMNode().value = '';
+    this.props.onTranslationSubmit({word: word, translation: translation});
+    this.refs.word.getDOMNode().value = '';
+    this.refs.translation.getDOMNode().value = '';
     return;
   },
   render: function() {
@@ -57,7 +57,7 @@ var TranslationForm = React.createClass({
 var TranslationBox = React.createClass({
   loadTranslationsFromServer: function() {
     $.ajax({
-      url: this.props.url,
+      url: "/api/translations/" + this.props.uid, // this.props.url,
       dataType: 'json',
       success: function(data) {
         this.setState({data: data});
@@ -72,7 +72,7 @@ var TranslationBox = React.createClass({
     var newTranslations = translations.concat([translation]);
     this.setState({data: newTranslations});
     $.ajax({
-      url: "/translations/create",
+      url: "/api/translations/" + this.props.uid + "/create",
       dataType: 'json',
       type: 'POST',
       data: translation,
@@ -96,13 +96,8 @@ var TranslationBox = React.createClass({
       <div className="translationBox">
         <h1>Translations</h1>
         <TranslationList data={this.state.data} />
-        <TranslationForm onTranslationSubmit={this.handleTranslationSubmit} />
+        <TranslationForm uid={this.props.uid} onTranslationSubmit={this.handleTranslationSubmit} />
       </div>
     );
   }
 });
-
-React.renderComponent(
-  <TranslationBox url="/api/translations/1" pollInterval={10000} />,
-  document.getElementById("reactable")
-);
