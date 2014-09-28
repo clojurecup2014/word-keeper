@@ -35,3 +35,10 @@ body {
 	text-shadow: 0px 1px 1px black;
 	background-color: transparent;
 }
+
+.alert-container {
+	text-align: center;
+	float: none;
+	margin: 0 auto;
+	width: 50%;
+}
