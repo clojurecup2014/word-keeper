@@ -1,6 +1,6 @@
 (ns word-keeper.core
   (:require [org.httpkit.server :refer [run-server]]
-            [compojure.core :refer [defroutes GET]]
+            [compojure.core :refer [defroutes GET POST context]]
             [compojure.handler :refer [site]]
             [compojure.route :refer [files not-found]]
             [clostache.parser :refer [render-resource]]
@@ -32,7 +32,9 @@
 
 (defroutes routes
   (GET "/" [] action-index)
-  (GET "/api/translations/:uid" [uid] #(flat-user-translations % uid))
+  (context "/api/translations/:uid" [uid]
+           (POST / [] #(flat-user-translations % uid))
+           (GET / [] #(post-translation % uid)))
   (GET "/vocabulary" [] (-> action-vocabulary auth-middleware))
   (GET "/signin" [] action-signin)
   (GET "/signout" [] action-signout)

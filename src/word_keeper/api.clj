@@ -20,3 +20,9 @@
     {:status 200
      :headers {"Content-Type" "application/json; charset=utf-8"}
      :body (generate-string result)}))
+
+(defn post-translation [req uid]
+  (let [word (-> req :params :word)
+        translation (-> req :params :translation)
+        wid (-> (create-english! word) first :id)]
+    (create-english-russian! uid wid translation)))
