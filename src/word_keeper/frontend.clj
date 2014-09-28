@@ -29,7 +29,8 @@
           (create-twitter-user! (Integer/parseInt user_id)  screen_name))
         {:status 200
          :headers {"Content-Type" "text/plain"}
-         :body (str "Signed in as " screen_name)})
+         :body (str "Signed in as " screen_name)
+         :session (assoc (:session req) :uid (:uid (find-twitter-user (Integer/parseInt user_id))))})
       {:status 200
        :headers {"Content-Type" "text/plain"}
        :body ("Something went wrong")})))
