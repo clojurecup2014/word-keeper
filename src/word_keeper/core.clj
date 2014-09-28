@@ -14,6 +14,7 @@
   (GET "/" [] action-index)
   (GET "/vocabulary" [] action-vocabulary)
   (GET "/signin" [] action-signin)
+  (GET "/signout" [] action-signout)
   (GET "/twitter-auth" [] action-twitter-auth)
   (files "/public/")
   (not-found "<h1>404. Not found</h1>"))

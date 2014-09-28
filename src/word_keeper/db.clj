@@ -24,7 +24,7 @@
 (defn find-twitter-user [twitter-id] (first (select-twitter-user db-spec twitter-id)))
 
 (defquery select-twitter-user-by-uid "sql/select-twitter-user-by-uid.sql")
-(defn find-user-data [uid]
+(defn find-twitter-user-by-uid [uid]
   (first
    (select-twitter-user-by-uid db-spec uid)))
 

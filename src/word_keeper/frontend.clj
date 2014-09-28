@@ -11,11 +11,13 @@
             nil)})
 
 (defn action-vocabulary [req]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body (render-resource
-            "views/vocabulary.html.mustache"
-            nil)})
+  (let [uid (:uid (:session req))
+        screen_name (:twitter_name (find-twitter-user-by-uid uid))]
+    {:status 200
+     :headers {"Content-Type" "text/html"}
+     :body (render-resource
+              "views/vocabulary.html.mustache"
+              {:screen_name screen_name})}))
 
 (defn action-twitter-auth [req]
   (let [tok (request-token)
