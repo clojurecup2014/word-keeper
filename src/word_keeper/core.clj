@@ -34,6 +34,7 @@
   (GET "/" [] action-index)
   (POST "/api/translations/:uid/create" [uid] #(post-translation % (Integer/parseInt uid)))
   (GET "/api/translations/:uid" [uid] #(flat-user-translations % uid))
+  (GET "/api/translations/:uid/word/:word/translation/:translation/delete" [uid, word, translation] #(action-delete-user-translation % uid word translation))
   (GET "/vocabulary" [] (-> action-vocabulary auth-middleware))
   (GET "/signin" [] action-signin)
   (GET "/signout" [] action-signout)

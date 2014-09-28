@@ -51,6 +51,11 @@
                   :notice "Something went wrong. Please try again."
                   :show_notice true)})))
 
+(defn action-delete-user-translation [req uid word translation]
+  ; call yesql
+  {:status 301
+   :headers {"location" "/vocabulary"}})
+
 (defn action-signout [req]
   (let [session (assoc (:session req)
                   :request-token nil
