@@ -1,0 +1,1 @@
+DELETE FROM english_russian WHERE id IN (SELECT english_russian.id FROM english, english_russian WHERE english.id = english_russian.wid AND uid = :uid AND word = :word AND translation = :translation);
