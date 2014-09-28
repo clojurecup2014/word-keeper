@@ -1,1 +1,3 @@
-SELECT * FROM english_russian WHERE uid = :uid;
+SELECT english_russian.id, uid, wid, word, translation FROM
+       english_russian JOIN english ON (wid = english.id)
+       WHERE uid = :uid;

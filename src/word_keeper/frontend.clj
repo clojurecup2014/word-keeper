@@ -45,10 +45,11 @@
        :body ("Something went wrong")})))
 
 (defn action-signout [req]
-  (let [session (assoc
-                  (:session req)
+  (let [session (assoc (:session req)
                   :request-token nil
-                  :uid nil)]
+                  :uid nil
+                  :notice "Signed out"
+                  :show_notice true)]
     {:status 301
      :session session
      :headers {"location" "/"}}))
