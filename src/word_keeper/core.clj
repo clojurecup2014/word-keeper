@@ -12,11 +12,11 @@
 
 (defroutes routes
   (GET "/" [] action-index)
+  (GET "/vocabulary" [] action-vocabulary)
   (GET "/signin" [] action-signin)
   (GET "/twitter-auth" [] action-twitter-auth)
   (files "/public/")
   (not-found "<h1>404. Not found</h1>"))
-
 
 (defn -main [& args]
   (run-server (site #'routes) {:port 8080}))

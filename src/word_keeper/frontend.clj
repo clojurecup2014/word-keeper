@@ -10,6 +10,13 @@
             "views/index.html.mustache"
             nil)})
 
+(defn action-vocabulary [req]
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body (render-resource
+            "views/vocabulary.html.mustache"
+            nil)})
+
 (defn action-twitter-auth [req]
   (let [tok (request-token)
         session (assoc (:session req) :request-token tok)
