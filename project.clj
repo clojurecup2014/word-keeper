@@ -24,5 +24,5 @@
                                    :output-dir "public/js/"
                                    :optimizations :none
                                    :pretty-print true}}]}
-  :local-repo-path ~(local-repo-path)
+  :local-repo ~(local-repo-path)
   :main word-keeper.core)
