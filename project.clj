@@ -1,3 +1,6 @@
+(defn local-repo-path []
+  (get (System/getenv) "M2_REPO" (str (get (System/getenv) "HOME") "/.m2/repository")))
+
 (defproject word-keeper "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
@@ -21,4 +24,5 @@
                                    :output-dir "public/js/"
                                    :optimizations :none
                                    :pretty-print true}}]}
+  :local-repo-path ~(local-repo-path)
   :main word-keeper.core)
