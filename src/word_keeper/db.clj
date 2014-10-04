@@ -1,11 +1,22 @@
 (ns word-keeper.db
   (:require [yesql.core :refer [defquery]]))
 
+(def db-subname
+  (str
+    "//"
+    (get (System/getenv) "OPENSHIFT_POSTGRESQL_DB_HOST" "localhost")
+    ":"
+    (get (System/getenv) "OPENSHIFT_POSTGRESQL_DB_PORT" "5432")
+    "/"
+    (get (System/getenv) "OPENSHIFT_APP_NAME" "wordkeeper")))
+
 (def db-spec {:classname "org.postgresql.Driver"
               :subprotocol "postgresql"
-              :subname "//localhost:5432/wordkeeper"
-              :user "cloudsigma"
-              :password "wordkeeper"})
+              :subname db-subname
+              :user
+                (get (System/getenv) "OPENSHIFT_POSTGRESQL_DB_USERNAME" "cloudsigma")
+              :password
+                (get (System/getenv) "OPENSHIFT_POSTGRESQL_DB_PASSWORD" "wordkeeper")})
 
 (defquery select-english-russian "sql/select-english-russian.sql")
 (defquery select-russian-english "sql/select-russian-english.sql")
