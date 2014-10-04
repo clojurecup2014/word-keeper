@@ -21,7 +21,7 @@ CREATE TABLE vocabularies (
        translation text
 );
 
-DROP TABLE russian;
-DROP TABLE english;
 DROP TABLE english_russian;
 DROP TABLE russian_english;
+DROP TABLE english;
+DROP TABLE russian;
