@@ -13,7 +13,8 @@
                  [ring "1.2.0"]
                  [cheshire "5.3.1"]
                  [de.ubercode.clostache/clostache "1.4.0"]
-                 [clj-oauth "1.5.1"]]
+                 [clj-oauth "1.5.1"]
+                 [liberator "0.12.2"]]
   :plugins [[lein-cljsbuild "1.0.3"]]
   :cljsbuild {:builds [{:source-paths ["src-cljs"]
                         :compiler {:output-to "public/js/frontend.js"
