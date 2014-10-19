@@ -7,19 +7,6 @@
               :user "cloudsigma"
               :password "wordkeeper"})
 
-(defquery select-english-russian "sql/select-english-russian.sql")
-(defquery select-russian-english "sql/select-russian-english.sql")
-
-(defn table-name [from to]
-  (let [langs {:en "english"
-               :ru "russian"}]
-    (str (from langs) "-" (to langs))))
-
-(defn find-translations [uid from to]
-  (if (= from :en)
-    (select-english-russian db-spec uid)
-    (select-russian-english db-spec uid)))
-
 (defquery select-twitter-user "sql/select-twitter-user.sql")
 (defn find-twitter-user [twitter-id] (first (select-twitter-user db-spec twitter-id)))
 
@@ -38,17 +25,3 @@
        (create-twitter-user! twitter-id twitter-name uid)))
   ([twitter-id twitter-name uid]
      (insert-twitter-user! db-spec twitter-id twitter-name uid)))
-
-(defquery insert-russian "sql/insert-russian.sql")
-(defn create-russian! [word] (insert-russian db-spec word))
-
-(defquery insert-english "sql/insert-english.sql")
-(defn create-english! [word] (insert-english db-spec word))
-
-(defquery insert-english-russian<! "sql/insert-english-russian.sql")
-(defn create-english-russian! [uid wid translation]
-  (insert-english-russian<! db-spec uid wid translation))
-
-(defquery delete-english-russian! "sql/delete-english-russian.sql")
-(defn remove-english-russian! [uid word translation]
-  (delete-english-russian! db-spec uid word translation))

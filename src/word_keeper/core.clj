@@ -1,13 +1,14 @@
 (ns word-keeper.core
   (:require [org.httpkit.server :refer [run-server]]
-            [compojure.core :refer [defroutes GET POST]]
+            [compojure.core :refer [defroutes GET POST ANY]]
             [compojure.handler :refer [site]]
             [compojure.route :refer [files not-found]]
             [clostache.parser :refer [render-resource]]
             [word-keeper.backend  :refer :all]
             [word-keeper.frontend :refer :all]
             [word-keeper.db :refer [find-twitter-user-by-uid]]
-            [word-keeper.api :refer :all]))
+            [word-keeper.api :refer :all]
+            [word-keeper.resources :refer [language]]))
 
 (def consumer-key "5KvZggyamEy8yHD0oACgAkLxH")
 (def consumer-secret "3DeEHXQ6LVh7LxSdApivzAOiwBAcGdvRorheKzheCchbPPQF6h")
@@ -30,18 +31,9 @@
                     :notice "Please, sign in as twitter user"
                     :show_notice true)})))
 
-(defroutes routes
-  (GET "/" [] action-index)
-  (POST "/api/translations/:uid/create" [uid] #(post-translation % (Integer/parseInt uid)))
-  (GET "/api/translations/:uid" [uid] #(flat-user-translations % uid))
-  (GET "/api/translations/:uid/word/:word/translation/:translation/delete" [uid, word, translation]
-       #(action-delete-user-translation % (Integer/parseInt uid) word translation))
-  (GET "/vocabulary" [] (-> action-vocabulary auth-middleware))
-  (GET "/signin" [] action-signin)
-  (GET "/signout" [] action-signout)
-  (GET "/twitter-auth" [] action-twitter-auth)
-  (files "/public/")
-  (not-found "<h1>404. Not found</h1>"))
+(defroutes new-routes
+  (ANY ["/language/:id"] [id] (language (Integer/parseInt id))))
 
 (defn -main [& args]
-  (run-server (site #'routes) {:port 8080}))
+  (run-server (site #'new-routes) {:port 8080})
+  (println "Listen port 8080..."))
