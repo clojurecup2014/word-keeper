@@ -36,3 +36,11 @@
        (create-twitter-user! twitter-id twitter-name uid)))
   ([twitter-id twitter-name uid]
      (insert-twitter-user! db-spec twitter-id twitter-name uid)))
+
+(defquery select-languages "sql/select-languages.sql")
+(defn find-languages []
+  (select-languages db-spec))
+
+(defquery select-language "sql/select-language.sql")
+(defn find-language [id]
+  (first (select-language db-spec id)))
