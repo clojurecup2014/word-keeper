@@ -35,5 +35,7 @@
   (ANY ["/language/:id"] [id] (language (Integer/parseInt id))))
 
 (defn -main [& args]
-  (run-server (site #'new-routes) {:port 8080})
-  (println "Listen port 8080..."))
+  (let [port (Integer/parseInt (get (System/getenv) "OPENSHIFT_CLOJURE_HTTP_PORT" "8080"))
+        ip (get (System/getenv) "OPENSHIFT_CLOJURE_HTTP_IP" "0.0.0.0")]
+    (run-server (site #'new-routes) {:ip ip :port port})
+    (println "Application run " ip ":" port)))
