@@ -34,7 +34,8 @@
 (defroutes new-routes
   (ANY "/languages" [] languages)
   (ANY ["/language/:id"] [id] (language (Integer/parseInt id)))
-  (ANY ["/words/:lang"] [lang] (words lang)))
+  (ANY ["/words/:lang"] [lang] (words lang))
+  (ANY ["/vocabulary/:lang"] [lang] (vocabulary 21 lang)))
 
 (defn -main [& args]
   (let [port (Integer/parseInt (get (System/getenv) "OPENSHIFT_CLOJURE_HTTP_PORT" "8080"))

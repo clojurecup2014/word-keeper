@@ -48,3 +48,7 @@
 (defquery select-words "sql/select-words.sql")
 (defn find-words [lang]
   (select-words db-spec lang))
+
+(defquery select-vocabularies "sql/select-vocabularies.sql")
+(defn find-vocabs [uid lang]
+  (select-vocabularies db-spec uid lang))
