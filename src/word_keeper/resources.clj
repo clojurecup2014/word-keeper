@@ -8,7 +8,7 @@
 
 (defresource language [id]
   :allowed-methods [:get]
-  :available-media-types ["application/json"]
+  :available-media-types ["application/json; charset=utf-8"]
   :exists? (fn [_]
              (let [e (find-language id)]
                (if-not (nil? e)
@@ -17,5 +17,10 @@
 
 (defresource languages
   :allowed-methods [:get]
-  :available-media-types ["application/json"]
+  :available-media-types ["application/json; charset=utf-8"]
   :handle-ok (find-languages))
+
+(defresource words [lang]
+  :allowed-methods [:get]
+  :available-media-types ["application/json; charset=utf-8"]
+  :handle-ok (fn [_] (generate-string (find-words lang))))

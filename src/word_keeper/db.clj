@@ -44,3 +44,7 @@
 (defquery select-language "sql/select-language.sql")
 (defn find-language [id]
   (first (select-language db-spec id)))
+
+(defquery select-words "sql/select-words.sql")
+(defn find-words [lang]
+  (select-words db-spec lang))
