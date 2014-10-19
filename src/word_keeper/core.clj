@@ -8,7 +8,7 @@
             [word-keeper.frontend :refer :all]
             [word-keeper.db :refer [find-twitter-user-by-uid]]
             [word-keeper.api :refer :all]
-            [word-keeper.resources :refer [language]]))
+            [word-keeper.resources :refer :all]))
 
 (def consumer-key "5KvZggyamEy8yHD0oACgAkLxH")
 (def consumer-secret "3DeEHXQ6LVh7LxSdApivzAOiwBAcGdvRorheKzheCchbPPQF6h")
@@ -32,6 +32,7 @@
                     :show_notice true)})))
 
 (defroutes new-routes
+  (ANY "/languages" [] languages)
   (ANY ["/language/:id"] [id] (language (Integer/parseInt id))))
 
 (defn -main [& args]
