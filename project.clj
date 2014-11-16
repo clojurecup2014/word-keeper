@@ -22,9 +22,9 @@
   :cljsbuild {:builds [{:source-paths ["src-cljs"]
                         :compiler {
                                    ; :preamble ["reagent/react.js"]
-                                   :output-to "public/js/frontend.js"
-                                   :output-dir "public/js/"
-                                   :optimizations :advanced
+                                   :output-to "public/js/out/frontend.js"
+                                   :output-dir "public/js/out"
+                                   :optimizations :whitespace
                                    :pretty-print true}}]}
   :local-repo ~(local-repo-path)
   :main word-keeper.core)
