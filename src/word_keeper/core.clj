@@ -32,10 +32,19 @@
                     :show_notice true)})))
 
 (defroutes new-routes
+  (GET "/" [] action-index)
   (ANY "/languages" [] languages)
   (ANY ["/language/:id"] [id] (language (Integer/parseInt id)))
   (ANY ["/words/:lang"] [lang] (words lang))
-  (ANY ["/vocabulary/:lang"] [lang] (vocabulary 21 lang)))
+  (ANY ["/vocabulary/:lang"] [lang] (vocabulary 21 lang))
+
+  (GET "/vocabulary" [] (-> action-vocabulary auth-middleware))
+  (GET "/signin" [] action-signin)
+  (GET "/signout" [] action-signout)
+  (GET "/twitter-auth" [] action-twitter-auth)
+
+  (files "/public/")
+  (not-found "<h1>404. Not found</h1>"))
 
 (defn -main [& args]
   (let [port (Integer/parseInt (get (System/getenv) "OPENSHIFT_CLOJURE_HTTP_PORT" "8080"))
