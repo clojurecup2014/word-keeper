@@ -10,7 +10,7 @@
                  [http-kit "2.1.16"]
                  [compojure "1.1.9"]
                  [org.clojure/clojurescript "0.0-2342"]
-                 [om "0.7.3"]
+                 [reagent "0.4.3"]
                  [yesql "0.4.0"]
                  [org.postgresql/postgresql "9.3-1102-jdbc41"]
                  [ring "1.2.0"]
@@ -20,9 +20,11 @@
                  [liberator "0.12.2"]]
   :plugins [[lein-cljsbuild "1.0.3"]]
   :cljsbuild {:builds [{:source-paths ["src-cljs"]
-                        :compiler {:output-to "public/js/frontend.js"
+                        :compiler {
+                                   ; :preamble ["reagent/react.js"]
+                                   :output-to "public/js/frontend.js"
                                    :output-dir "public/js/"
-                                   :optimizations :none
+                                   :optimizations :advanced
                                    :pretty-print true}}]}
   :local-repo ~(local-repo-path)
   :main word-keeper.core)
