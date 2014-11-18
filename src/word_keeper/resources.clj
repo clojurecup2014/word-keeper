@@ -29,3 +29,8 @@
   :allowed-methods [:get]
   :available-media-types ["application/json; charset=utf-8"]
   :handle-ok (fn [_] (generate-string (find-vocabs uid lang))))
+
+(defresource user [uid]
+  :allowed-methods [:get]
+  :available-media-types ["application/json; charset=utf-8"]
+  :handle-ok (fn [_] (generate-string (find-user uid))))

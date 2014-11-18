@@ -33,6 +33,8 @@
 
 (defroutes new-routes
   (GET "/" [] action-index)
+  (ANY "/user/:uid" [uid] (user (Integer/parseInt uid)))
+  (ANY "/user/:uid/vocabulary/:lang" [uid lang] (vocabulary (Integer/parseInt uid) lang))
   (ANY "/languages" [] languages)
   (ANY ["/language/:id"] [id] (language (Integer/parseInt id)))
   (ANY ["/words/:lang"] [lang] (words lang))
