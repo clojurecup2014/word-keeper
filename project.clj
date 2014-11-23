@@ -17,8 +17,11 @@
                  [cheshire "5.3.1"]
                  [de.ubercode.clostache/clostache "1.4.0"]
                  [clj-oauth "1.5.1"]
-                 [liberator "0.12.2"]]
-  :plugins [[lein-cljsbuild "1.0.3"]]
+                 [liberator "0.12.2"]
+                 [cljs-http "0.1.20"]
+                 [prismatic/dommy "1.0.0"]]
+  :plugins [[lein-cljsbuild "1.0.3"]
+            [com.cemerick/austin "0.1.5"]]
   :cljsbuild {:builds [{:source-paths ["src-cljs"]
                         :compiler {
                                    ; :preamble ["reagent/react.js"]
